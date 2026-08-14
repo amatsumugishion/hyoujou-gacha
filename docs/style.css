@@ -208,6 +208,18 @@ main {
   background: #fdf1f0;
 }
 
+.grid-section {
+  margin-bottom: 28px;
+}
+
+.grid-section-title {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin: 0 0 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));

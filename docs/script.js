@@ -3,6 +3,7 @@ const ALL_LABEL = "すべて";
 const OTHER_CATEGORY = "無所属";
 const OTHER_FALLBACK_LABEL = "無所属（その他）";
 const NON_COMPOSITE_TAGS = new Set(["fang", "skin fang"]);
+const CATEGORY_ORDER = ["笑顔", "照れ", "怒り", "悲しみ", "驚き", "嗜虐"];
 
 let records = [];
 let categories = [];
@@ -12,6 +13,8 @@ let selectedGachaCategory = ALL_LABEL;
 let selectedListCategory = ALL_LABEL;
 let selectedGachaComposite = "all"; // all | single | composite
 let selectedListComposite = "all";
+let selectedGachaPart = ALL_LABEL; // すべて | 口元 | 目元
+let selectedListPart = ALL_LABEL;
 
 async function loadData() {
   const [promptsRes, translationsRes, partRulesRes] = await Promise.all([
@@ -25,20 +28,25 @@ async function loadData() {
 
   const set = new Set();
   records.forEach((r) => effectiveCategories(r).forEach((c) => set.add(c)));
-  categories = [ALL_LABEL, ...Array.from(set)];
+  const known = CATEGORY_ORDER.filter((c) => set.has(c));
+  const others = Array.from(set).filter((c) => !CATEGORY_ORDER.includes(c) && c !== OTHER_FALLBACK_LABEL);
+  categories = [ALL_LABEL, ...known, ...others, ...(set.has(OTHER_FALLBACK_LABEL) ? [OTHER_FALLBACK_LABEL] : [])];
 }
 
-// 「無所属」を、タグの中身に応じて口元/目元/無所属（その他）に読み替える（サイト表示専用、CSVは変更しない）
+// 「無所属」はサイト表示上「無所属（その他）」というラベルにする（CSVは変更しない）
 function effectiveCategories(record) {
-  return record.categories.map((cat) => {
-    if (cat !== OTHER_CATEGORY) return cat;
+  return record.categories.map((cat) => (cat === OTHER_CATEGORY ? OTHER_FALLBACK_LABEL : cat));
+}
 
-    const tagSet = new Set(record.tags);
-    for (const [part, keywords] of Object.entries(partRules)) {
-      if (keywords.some((k) => tagSet.has(k))) return part;
-    }
-    return OTHER_FALLBACK_LABEL;
-  });
+// 無所属に分類された画像のタグを、口元/目元のどちらに該当するか判定する（サイト表示専用）
+function recordParts(record) {
+  if (!record.categories.includes(OTHER_CATEGORY)) return [];
+  const tagSet = new Set(record.tags);
+  const parts = [];
+  for (const [part, keywords] of Object.entries(partRules)) {
+    if (keywords.some((k) => tagSet.has(k))) parts.push(part);
+  }
+  return parts;
 }
 
 // タグ数が2以上（fang/skin fangは数えない）なら複合とみなす
@@ -64,9 +72,15 @@ const COMPOSITE_OPTIONS = [
   { value: "composite", label: "複合" },
 ];
 
-function renderCompositeButtons(container, selected, onSelect) {
+const PART_OPTIONS = [
+  { value: ALL_LABEL, label: "すべて" },
+  { value: "口元", label: "口元" },
+  { value: "目元", label: "目元" },
+];
+
+function renderToggleButtons(container, options, selected, onSelect) {
   container.innerHTML = "";
-  COMPOSITE_OPTIONS.forEach((opt) => {
+  options.forEach((opt) => {
     const btn = document.createElement("button");
     btn.textContent = opt.label;
     if (opt.value === selected) btn.classList.add("selected");
@@ -75,11 +89,12 @@ function renderCompositeButtons(container, selected, onSelect) {
   });
 }
 
-function filteredRecords(category, compositeMode) {
+function filteredRecords(category, compositeMode, partMode) {
   return records.filter((r) => {
     if (category !== ALL_LABEL && !effectiveCategories(r).includes(category)) return false;
     if (compositeMode === "single" && isComposite(r)) return false;
     if (compositeMode === "composite" && !isComposite(r)) return false;
+    if (partMode && partMode !== ALL_LABEL && !recordParts(r).includes(partMode)) return false;
     return true;
   });
 }
@@ -198,7 +213,7 @@ function buildFavoriteButton(record, onChange) {
 // ---- ガチャ画面 ----
 
 function drawGacha() {
-  const pool = filteredRecords(selectedGachaCategory, selectedGachaComposite);
+  const pool = filteredRecords(selectedGachaCategory, selectedGachaComposite, selectedGachaPart);
   const resultEl = document.getElementById("gacha-result");
 
   if (pool.length === 0) {
@@ -237,6 +252,7 @@ function drawGacha() {
 function setupGachaView() {
   const container = document.getElementById("category-buttons");
   const compositeContainer = document.getElementById("gacha-composite-buttons");
+  const partContainer = document.getElementById("gacha-part-buttons");
 
   function handleSelect(cat) {
     selectedGachaCategory = cat;
@@ -246,12 +262,19 @@ function setupGachaView() {
 
   function handleCompositeSelect(mode) {
     selectedGachaComposite = mode;
-    renderCompositeButtons(compositeContainer, selectedGachaComposite, handleCompositeSelect);
+    renderToggleButtons(compositeContainer, COMPOSITE_OPTIONS, selectedGachaComposite, handleCompositeSelect);
+    drawGacha();
+  }
+
+  function handlePartSelect(part) {
+    selectedGachaPart = part;
+    renderToggleButtons(partContainer, PART_OPTIONS, selectedGachaPart, handlePartSelect);
     drawGacha();
   }
 
   renderCategoryButtons(container, selectedGachaCategory, handleSelect);
-  renderCompositeButtons(compositeContainer, selectedGachaComposite, handleCompositeSelect);
+  renderToggleButtons(compositeContainer, COMPOSITE_OPTIONS, selectedGachaComposite, handleCompositeSelect);
+  renderToggleButtons(partContainer, PART_OPTIONS, selectedGachaPart, handlePartSelect);
 
   let gachaBtn = document.getElementById("gacha-draw-btn");
   if (!gachaBtn) {
@@ -262,7 +285,7 @@ function setupGachaView() {
     gachaBtn.style.display = "block";
     gachaBtn.style.margin = "0 auto 24px";
     gachaBtn.addEventListener("click", drawGacha);
-    compositeContainer.insertAdjacentElement("afterend", gachaBtn);
+    partContainer.insertAdjacentElement("afterend", gachaBtn);
   }
 }
 
@@ -298,10 +321,43 @@ function renderGridItems(grid, pool, emptyMessage) {
   });
 }
 
+function buildGridSection(title, pool) {
+  const section = document.createElement("div");
+  section.className = "grid-section";
+
+  const heading = document.createElement("h3");
+  heading.className = "grid-section-title";
+  heading.textContent = `${title}（${pool.length}）`;
+  section.appendChild(heading);
+
+  const grid = document.createElement("div");
+  grid.className = "grid";
+  section.appendChild(grid);
+  renderGridItems(grid, pool, "該当する画像がまだありません");
+
+  return section;
+}
+
 function renderListGrid() {
-  const grid = document.getElementById("list-grid");
-  const pool = filteredRecords(selectedListCategory, selectedListComposite);
-  renderGridItems(grid, pool, "このカテゴリの画像がまだありません");
+  const container = document.getElementById("list-grid-container");
+  container.innerHTML = "";
+
+  const pool = filteredRecords(selectedListCategory, "all", selectedListPart);
+
+  if (pool.length === 0) {
+    container.innerHTML = '<p class="empty-note">このカテゴリの画像がまだありません</p>';
+    return;
+  }
+
+  const singlePool = pool.filter((r) => !isComposite(r));
+  const compositePool = pool.filter((r) => isComposite(r));
+
+  if (selectedListComposite !== "composite") {
+    container.appendChild(buildGridSection("単体", singlePool));
+  }
+  if (selectedListComposite !== "single") {
+    container.appendChild(buildGridSection("複合", compositePool));
+  }
 }
 
 function renderFavoritesGrid() {
@@ -314,14 +370,20 @@ function renderFavoritesGrid() {
 function setupListView() {
   const container = document.getElementById("list-category-buttons");
   const compositeContainer = document.getElementById("list-composite-buttons");
+  const partContainer = document.getElementById("list-part-buttons");
 
   renderCategoryButtons(container, selectedListCategory, (cat) => {
     selectedListCategory = cat;
     setupListView();
     renderListGrid();
   });
-  renderCompositeButtons(compositeContainer, selectedListComposite, (mode) => {
+  renderToggleButtons(compositeContainer, COMPOSITE_OPTIONS, selectedListComposite, (mode) => {
     selectedListComposite = mode;
+    setupListView();
+    renderListGrid();
+  });
+  renderToggleButtons(partContainer, PART_OPTIONS, selectedListPart, (part) => {
+    selectedListPart = part;
     setupListView();
     renderListGrid();
   });
