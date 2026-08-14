@@ -21,7 +21,7 @@
       "照れ"
     ],
     "intensity": null,
-    "note": ""
+    "note": "embarrassed"
   },
   {
     "id": 3,
@@ -33,7 +33,7 @@
       "怒り"
     ],
     "intensity": null,
-    "note": ""
+    "note": "annoyed"
   },
   {
     "id": 4,
@@ -45,7 +45,7 @@
       "悲しみ"
     ],
     "intensity": null,
-    "note": ""
+    "note": "depressed"
   },
   {
     "id": 5,
@@ -69,7 +69,7 @@
       "驚き"
     ],
     "intensity": null,
-    "note": ""
+    "note": "shocked"
   },
   {
     "id": 7,
@@ -79,7 +79,7 @@
       "open mouth"
     ],
     "categories": [
-      "驚き"
+      "無所属"
     ],
     "intensity": null,
     "note": ""
@@ -92,7 +92,7 @@
       "open mouth"
     ],
     "categories": [
-      "驚き"
+      "無所属"
     ],
     "intensity": null,
     "note": ""
@@ -143,7 +143,7 @@
       "無所属"
     ],
     "intensity": null,
-    "note": ""
+    "note": "+_+"
   },
   {
     "id": 13,
@@ -284,6 +284,514 @@
       "wide-eyed"
     ],
     "categories": [
+      "驚き"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 25,
+    "file": "00011-3320852017.png",
+    "tags": [
+      "tsurime"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 26,
+    "file": "00014-1974353256.png",
+    "tags": [
+      "jitome"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 27,
+    "file": "00014-3121977944.png",
+    "tags": [
+      "tareme"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 28,
+    "file": "00019-3191211176.png",
+    "tags": [
+      "chestnut mouth"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 29,
+    "file": "00019-980204737.png",
+    "tags": [
+      "half-closed eyes"
+    ],
+    "categories": [
+      "無表情"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 30,
+    "file": "00021-854877382.png",
+    "tags": [
+      "wavy mouth"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 31,
+    "file": "00023-533233778.png",
+    "tags": [
+      "light smile"
+    ],
+    "categories": [
+      "笑顔"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 32,
+    "file": "00029-133318544.png",
+    "tags": [
+      "naughty smile"
+    ],
+    "categories": [
+      "笑顔"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 33,
+    "file": "00033-3355752474.png",
+    "tags": [
+      "evil smile"
+    ],
+    "categories": [
+      "笑顔"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 34,
+    "file": "00036-3837649190.png",
+    "tags": [
+      "nose blush"
+    ],
+    "categories": [
+      "照れ"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 36,
+    "file": "00038-1700115445.png",
+    "tags": [
+      "blush"
+    ],
+    "categories": [
+      "照れ"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 37,
+    "file": "00042-1535013935.png",
+    "tags": [
+      "wink"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 38,
+    "file": "00042-195026485.png",
+    "tags": [
+      "scared"
+    ],
+    "categories": [
+      "驚き"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 39,
+    "file": "00044-3106904733.png",
+    "tags": [
+      "head tilt"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 40,
+    "file": "00052-1139814202.png",
+    "tags": [
+      "frown"
+    ],
+    "categories": [
+      "悲しみ"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 41,
+    "file": "00063-2637657776.png",
+    "tags": [
+      "pout"
+    ],
+    "categories": [
+      "怒り"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 42,
+    "file": "00069-4070766218.png",
+    "tags": [
+      "glaring"
+    ],
+    "categories": [
+      "怒り"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 43,
+    "file": "00075-1134277827.png",
+    "tags": [
+      "v-shaped eyebrows"
+    ],
+    "categories": [
+      "怒り"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 44,
+    "file": "00090-3809559917.png",
+    "tags": [
+      "smirk"
+    ],
+    "categories": [
+      "笑顔"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 45,
+    "file": "00090-720234623.png",
+    "tags": [
+      "full-face blush"
+    ],
+    "categories": [
+      "照れ"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 46,
+    "file": "00096-2142842704.png",
+    "tags": [
+      "yandere"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 47,
+    "file": "00100-1273554509.png",
+    "tags": [
+      "empty eyes"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 48,
+    "file": "00104-1665737147.png",
+    "tags": [
+      "ringed eyes"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 49,
+    "file": "00112-1770178112.png",
+    "tags": [
+      "dot mouth"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 50,
+    "file": "00117-308893447.png",
+    "tags": [
+      "triangle mouth"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 51,
+    "file": "00134-2822189177.png",
+    "tags": [
+      "disdain"
+    ],
+    "categories": [
+      "悲しみ"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 52,
+    "file": "00134-2961722759.png",
+    "tags": [
+      "heart-shaped pupils"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 53,
+    "file": "00138-3475658572.png",
+    "tags": [
+      "disgust"
+    ],
+    "categories": [
+      "怒り"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 54,
+    "file": "00149-1612639390.png",
+    "tags": [
+      "gloom (expression)"
+    ],
+    "categories": [
+      "悲しみ"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 55,
+    "file": "00152-131582663.png",
+    "tags": [
+      "rolling eyes"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 56,
+    "file": "00152-1539849715.png",
+    "tags": [
+      "tears"
+    ],
+    "categories": [
+      "悲しみ"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 57,
+    "file": "00156-2817403325.png",
+    "tags": [
+      "horrified"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 58,
+    "file": "00159-1043817296.png",
+    "tags": [
+      "nervous"
+    ],
+    "categories": [
+      "照れ"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 59,
+    "file": "00169-2211368656.png",
+    "tags": [
+      "panicking"
+    ],
+    "categories": [
+      "驚き"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 60,
+    "file": "00170-2849258707.png",
+    "tags": [
+      "turn pale"
+    ],
+    "categories": [
+      "悲しみ"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 61,
+    "file": "00179-2990611090.png",
+    "tags": [
+      "half-closed eyes",
+      "smile"
+    ],
+    "categories": [
+      "笑顔",
+      "無表情"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 62,
+    "file": "00184-256662437.png",
+    "tags": [
+      "glaring",
+      "clenched teeth"
+    ],
+    "categories": [
+      "怒り",
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 63,
+    "file": "00184-2690690944.png",
+    "tags": [
+      "sad",
+      "open mouth",
+      "turn pale"
+    ],
+    "categories": [
+      "悲しみ",
+      "驚き"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 64,
+    "file": "00190-2639630825.png",
+    "tags": [
+      "half-closed eyes",
+      "shy",
+      "nose blush"
+    ],
+    "categories": [
+      "照れ",
+      "照れ"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 65,
+    "file": "00191-2199639015.png",
+    "tags": [
+      "surprised",
+      "uneven eyes",
+      "open mouth",
+      "wavy mouth"
+    ],
+    "categories": [
+      "驚き"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 66,
+    "file": "00195-529452100.png",
+    "tags": [
+      "smug",
+      "open mouth",
+      "fang"
+    ],
+    "categories": [
+      "笑顔",
       "驚き"
     ],
     "intensity": null,

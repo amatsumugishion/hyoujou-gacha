@@ -55,14 +55,21 @@ def parse_prompts_txt(path: Path) -> list[tuple[str, str]]:
     return entries
 
 
+ESCAPED_OPEN = "\x00ESC_OPEN\x00"
+ESCAPED_CLOSE = "\x00ESC_CLOSE\x00"
+
+
 def normalize_weights(prompt_text: str) -> str:
-    """(tag:1.2) / (tag) / [tag] の強調構文を除去し、素のタグ文字列に戻す"""
-    text = prompt_text
+    """(tag:1.2) / (tag) / [tag] の強調構文を除去し、素のタグ文字列に戻す。
+    \\( \\) はタグ自体が持つ literal な括弧（例: gloom \\(expression\\)）なので、
+    強調構文と誤認しないよう一時退避してから処理する。"""
+    text = prompt_text.replace("\\(", ESCAPED_OPEN).replace("\\)", ESCAPED_CLOSE)
     for pattern in (WEIGHT_PAREN_RE, PLAIN_PAREN_RE, BRACKET_RE):
         prev = None
         while prev != text:
             prev = text
             text = pattern.sub(r"\1", text)
+    text = text.replace(ESCAPED_OPEN, "(").replace(ESCAPED_CLOSE, ")")
     return text
 
 
@@ -77,12 +84,17 @@ def load_category_rules(path: Path) -> dict[str, list[str]]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+FALLBACK_CATEGORY = "無所属"
+
+
 def match_categories(tags: list[str], rules: dict[str, list[str]]) -> list[str]:
     tag_set = set(tags)
     matched = []
     for category, keywords in rules.items():
         if tag_set & set(keywords):
             matched.append(category)
+    if not matched:
+        matched.append(FALLBACK_CATEGORY)
     return matched
 
 
