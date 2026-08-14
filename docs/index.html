@@ -15,6 +15,7 @@
 <nav class="mode-switch">
   <button class="mode-btn active" data-mode="gacha">ガチャ</button>
   <button class="mode-btn" data-mode="list">一覧</button>
+  <button class="mode-btn" data-mode="favorites">お気に入り</button>
 </nav>
 
 <main>
@@ -34,13 +35,18 @@
     <div class="grid" id="list-grid"></div>
   </section>
 
+  <section id="favorites-view" class="view">
+    <div class="grid" id="favorites-grid"></div>
+  </section>
+
 </main>
 
 <div class="modal" id="modal">
   <div class="modal-inner">
     <button class="modal-close" id="modal-close">×</button>
     <img id="modal-img" src="" alt="">
-    <div class="modal-tags" id="modal-tags"></div>
+    <div id="modal-favorite"></div>
+    <div id="modal-tags-row"></div>
     <div class="modal-tags" id="modal-tags-ja"></div>
     <div id="modal-note"></div>
   </div>

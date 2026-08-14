@@ -113,6 +113,88 @@ function renderNote(container, note) {
   container.appendChild(p);
 }
 
+function buildTagsRow(tags) {
+  const row = document.createElement("div");
+  row.className = "tags-row";
+
+  const chipsWrap = document.createElement("div");
+  chipsWrap.className = "tags";
+  renderTagChips(chipsWrap, tags);
+  row.appendChild(chipsWrap);
+
+  const copyBtn = document.createElement("button");
+  copyBtn.className = "copy-btn";
+  copyBtn.type = "button";
+  copyBtn.textContent = "コピー";
+  copyBtn.title = "プロンプトをコピー";
+  copyBtn.addEventListener("click", () => {
+    const original = copyBtn.textContent;
+    navigator.clipboard.writeText(tags.join(", "))
+      .then(() => {
+        copyBtn.textContent = "コピーしました";
+      })
+      .catch(() => {
+        copyBtn.textContent = "コピーに失敗しました";
+      })
+      .finally(() => {
+        setTimeout(() => {
+          copyBtn.textContent = original;
+        }, 1200);
+      });
+  });
+  row.appendChild(copyBtn);
+
+  return row;
+}
+
+// ---- お気に入り ----
+
+const FAVORITES_KEY = "hyoujou-gacha-favorites";
+
+function getFavorites() {
+  try {
+    return JSON.parse(localStorage.getItem(FAVORITES_KEY)) || [];
+  } catch {
+    return [];
+  }
+}
+
+function isFavorite(file) {
+  return getFavorites().includes(file);
+}
+
+function toggleFavorite(file) {
+  const favs = getFavorites();
+  const idx = favs.indexOf(file);
+  if (idx === -1) {
+    favs.push(file);
+  } else {
+    favs.splice(idx, 1);
+  }
+  localStorage.setItem(FAVORITES_KEY, JSON.stringify(favs));
+}
+
+function buildFavoriteButton(record, onChange) {
+  const btn = document.createElement("button");
+  btn.className = "favorite-btn";
+  btn.type = "button";
+
+  function render() {
+    const active = isFavorite(record.file);
+    btn.textContent = active ? "★ お気に入り登録済み" : "☆ お気に入りに追加";
+    btn.classList.toggle("active", active);
+  }
+
+  btn.addEventListener("click", () => {
+    toggleFavorite(record.file);
+    render();
+    if (onChange) onChange();
+  });
+
+  render();
+  return btn;
+}
+
 // ---- ガチャ画面 ----
 
 function drawGacha() {
@@ -132,10 +214,8 @@ function drawGacha() {
   img.alt = picked.tags.join(", ");
   resultEl.appendChild(img);
 
-  const tagsWrap = document.createElement("div");
-  tagsWrap.className = "tags";
-  renderTagChips(tagsWrap, picked.tags);
-  resultEl.appendChild(tagsWrap);
+  resultEl.appendChild(buildFavoriteButton(picked));
+  resultEl.appendChild(buildTagsRow(picked.tags));
 
   const jaWrap = document.createElement("div");
   jaWrap.className = "tags";
@@ -188,13 +268,11 @@ function setupGachaView() {
 
 // ---- 一覧画面 ----
 
-function renderListGrid() {
-  const grid = document.getElementById("list-grid");
-  const pool = filteredRecords(selectedListCategory, selectedListComposite);
+function renderGridItems(grid, pool, emptyMessage) {
   grid.innerHTML = "";
 
   if (pool.length === 0) {
-    grid.innerHTML = '<p class="empty-note">このカテゴリの画像がまだありません</p>';
+    grid.innerHTML = `<p class="empty-note">${emptyMessage}</p>`;
     return;
   }
 
@@ -220,6 +298,19 @@ function renderListGrid() {
   });
 }
 
+function renderListGrid() {
+  const grid = document.getElementById("list-grid");
+  const pool = filteredRecords(selectedListCategory, selectedListComposite);
+  renderGridItems(grid, pool, "このカテゴリの画像がまだありません");
+}
+
+function renderFavoritesGrid() {
+  const grid = document.getElementById("favorites-grid");
+  const favs = getFavorites();
+  const pool = records.filter((r) => favs.includes(r.file));
+  renderGridItems(grid, pool, "まだお気に入りがありません");
+}
+
 function setupListView() {
   const container = document.getElementById("list-category-buttons");
   const compositeContainer = document.getElementById("list-composite-buttons");
@@ -241,7 +332,19 @@ function setupListView() {
 
 function openModal(record) {
   document.getElementById("modal-img").src = IMG_BASE + record.file;
-  renderTagChips(document.getElementById("modal-tags"), record.tags);
+
+  const favSlot = document.getElementById("modal-favorite");
+  favSlot.innerHTML = "";
+  favSlot.appendChild(buildFavoriteButton(record, () => {
+    if (document.getElementById("favorites-view").classList.contains("active")) {
+      renderFavoritesGrid();
+    }
+  }));
+
+  const tagsSlot = document.getElementById("modal-tags-row");
+  tagsSlot.innerHTML = "";
+  tagsSlot.appendChild(buildTagsRow(record.tags));
+
   renderTranslatedChips(document.getElementById("modal-tags-ja"), record.tags);
   renderNote(document.getElementById("modal-note"), record.note);
   document.getElementById("modal").classList.add("active");
@@ -262,6 +365,8 @@ function setupModeSwitch() {
       const mode = btn.dataset.mode;
       document.querySelectorAll(".view").forEach((v) => v.classList.remove("active"));
       document.getElementById(mode + "-view").classList.add("active");
+
+      if (mode === "favorites") renderFavoritesGrid();
     });
   });
 }
@@ -271,6 +376,7 @@ async function init() {
   setupModeSwitch();
   setupGachaView();
   setupListView();
+  renderFavoritesGrid();
 
   document.getElementById("modal-close").addEventListener("click", closeModal);
   document.getElementById("modal").addEventListener("click", (e) => {

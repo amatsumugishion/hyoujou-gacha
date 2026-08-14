@@ -54,7 +54,7 @@
       "expressionless"
     ],
     "categories": [
-      "無表情"
+      "無所属"
     ],
     "intensity": null,
     "note": ""
@@ -344,7 +344,7 @@
       "half-closed eyes"
     ],
     "categories": [
-      "無表情"
+      "無所属"
     ],
     "intensity": null,
     "note": ""
@@ -464,7 +464,7 @@
       "frown"
     ],
     "categories": [
-      "悲しみ"
+      "怒り"
     ],
     "intensity": null,
     "note": ""
@@ -668,7 +668,7 @@
       "horrified"
     ],
     "categories": [
-      "無所属"
+      "驚き"
     ],
     "intensity": null,
     "note": ""
@@ -718,7 +718,7 @@
     ],
     "categories": [
       "笑顔",
-      "無表情"
+      "無所属"
     ],
     "intensity": null,
     "note": ""
@@ -761,7 +761,6 @@
       "nose blush"
     ],
     "categories": [
-      "照れ",
       "照れ"
     ],
     "intensity": null,
