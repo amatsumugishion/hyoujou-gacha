@@ -72,10 +72,18 @@ const COMPOSITE_OPTIONS = [
   { value: "composite", label: "複合" },
 ];
 
-const PART_OPTIONS = [
+// すべて画面用：すべて/口元/目元
+const PART_OPTIONS_ALL = [
   { value: ALL_LABEL, label: "すべて" },
   { value: "口元", label: "口元" },
   { value: "目元", label: "目元" },
+];
+
+// 無所属（その他）画面用：単体/複合の代わりにこちらを出す
+const PART_OPTIONS_OTHER = [
+  { value: "口元", label: "口元" },
+  { value: "目元", label: "目元" },
+  { value: "その他", label: "その他" },
 ];
 
 function renderToggleButtons(container, options, selected, onSelect) {
@@ -89,12 +97,62 @@ function renderToggleButtons(container, options, selected, onSelect) {
   });
 }
 
+// カテゴリに応じて、口元/目元の絞り込み行をどう出すか決める
+// "other" = 無所属（その他）を選択中（単体/複合は隠し、口元/目元/その他を出す）
+// "all"   = すべてを選択中（単体/複合と、すべて/口元/目元を両方出す）
+// "none"  = それ以外の個別カテゴリ（単体/複合のみ、口元/目元は隠す）
+function partContextFor(category) {
+  if (category === OTHER_FALLBACK_LABEL) return "other";
+  if (category === ALL_LABEL) return "all";
+  return "none";
+}
+
+function renderSecondaryRows(category, compositeContainer, partContainer, getComposite, setComposite, getPart, setPart, onChange) {
+  const ctx = partContextFor(category);
+
+  if (ctx === "other") {
+    compositeContainer.style.display = "none";
+    partContainer.style.display = "flex";
+    if (!["口元", "目元", "その他"].includes(getPart())) setPart("");
+    renderToggleButtons(partContainer, PART_OPTIONS_OTHER, getPart(), (v) => {
+      setPart(v);
+      onChange();
+    });
+  } else if (ctx === "all") {
+    compositeContainer.style.display = "flex";
+    partContainer.style.display = "flex";
+    if (![ALL_LABEL, "口元", "目元"].includes(getPart())) setPart(ALL_LABEL);
+    renderToggleButtons(partContainer, PART_OPTIONS_ALL, getPart(), (v) => {
+      setPart(v);
+      onChange();
+    });
+    renderToggleButtons(compositeContainer, COMPOSITE_OPTIONS, getComposite(), (v) => {
+      setComposite(v);
+      onChange();
+    });
+  } else {
+    partContainer.style.display = "none";
+    setPart(ALL_LABEL);
+    compositeContainer.style.display = "flex";
+    renderToggleButtons(compositeContainer, COMPOSITE_OPTIONS, getComposite(), (v) => {
+      setComposite(v);
+      onChange();
+    });
+  }
+
+  return ctx;
+}
+
 function filteredRecords(category, compositeMode, partMode) {
   return records.filter((r) => {
     if (category !== ALL_LABEL && !effectiveCategories(r).includes(category)) return false;
     if (compositeMode === "single" && isComposite(r)) return false;
     if (compositeMode === "composite" && !isComposite(r)) return false;
-    if (partMode && partMode !== ALL_LABEL && !recordParts(r).includes(partMode)) return false;
+    if (partMode === "口元" || partMode === "目元") {
+      if (!recordParts(r).includes(partMode)) return false;
+    } else if (partMode === "その他") {
+      if (!(r.categories.includes(OTHER_CATEGORY) && recordParts(r).length === 0)) return false;
+    }
     return true;
   });
 }
@@ -254,27 +312,24 @@ function setupGachaView() {
   const compositeContainer = document.getElementById("gacha-composite-buttons");
   const partContainer = document.getElementById("gacha-part-buttons");
 
+  function refreshSecondaryRows() {
+    renderSecondaryRows(
+      selectedGachaCategory, compositeContainer, partContainer,
+      () => selectedGachaComposite, (v) => { selectedGachaComposite = v; },
+      () => selectedGachaPart, (v) => { selectedGachaPart = v; },
+      () => { refreshSecondaryRows(); drawGacha(); }
+    );
+  }
+
   function handleSelect(cat) {
     selectedGachaCategory = cat;
     renderCategoryButtons(container, selectedGachaCategory, handleSelect);
-    drawGacha();
-  }
-
-  function handleCompositeSelect(mode) {
-    selectedGachaComposite = mode;
-    renderToggleButtons(compositeContainer, COMPOSITE_OPTIONS, selectedGachaComposite, handleCompositeSelect);
-    drawGacha();
-  }
-
-  function handlePartSelect(part) {
-    selectedGachaPart = part;
-    renderToggleButtons(partContainer, PART_OPTIONS, selectedGachaPart, handlePartSelect);
+    refreshSecondaryRows();
     drawGacha();
   }
 
   renderCategoryButtons(container, selectedGachaCategory, handleSelect);
-  renderToggleButtons(compositeContainer, COMPOSITE_OPTIONS, selectedGachaComposite, handleCompositeSelect);
-  renderToggleButtons(partContainer, PART_OPTIONS, selectedGachaPart, handlePartSelect);
+  refreshSecondaryRows();
 
   let gachaBtn = document.getElementById("gacha-draw-btn");
   if (!gachaBtn) {
@@ -342,10 +397,19 @@ function renderListGrid() {
   const container = document.getElementById("list-grid-container");
   container.innerHTML = "";
 
-  const pool = filteredRecords(selectedListCategory, "all", selectedListPart);
+  const ctx = partContextFor(selectedListCategory);
+  const pool = filteredRecords(selectedListCategory, ctx === "other" ? "all" : selectedListComposite, selectedListPart);
 
   if (pool.length === 0) {
     container.innerHTML = '<p class="empty-note">このカテゴリの画像がまだありません</p>';
+    return;
+  }
+
+  if (ctx === "other") {
+    const grid = document.createElement("div");
+    grid.className = "grid";
+    container.appendChild(grid);
+    renderGridItems(grid, pool, "該当する画像がまだありません");
     return;
   }
 
@@ -372,21 +436,24 @@ function setupListView() {
   const compositeContainer = document.getElementById("list-composite-buttons");
   const partContainer = document.getElementById("list-part-buttons");
 
-  renderCategoryButtons(container, selectedListCategory, (cat) => {
+  function refreshSecondaryRows() {
+    renderSecondaryRows(
+      selectedListCategory, compositeContainer, partContainer,
+      () => selectedListComposite, (v) => { selectedListComposite = v; },
+      () => selectedListPart, (v) => { selectedListPart = v; },
+      () => { refreshSecondaryRows(); renderListGrid(); }
+    );
+  }
+
+  function handleSelect(cat) {
     selectedListCategory = cat;
-    setupListView();
+    renderCategoryButtons(container, selectedListCategory, handleSelect);
+    refreshSecondaryRows();
     renderListGrid();
-  });
-  renderToggleButtons(compositeContainer, COMPOSITE_OPTIONS, selectedListComposite, (mode) => {
-    selectedListComposite = mode;
-    setupListView();
-    renderListGrid();
-  });
-  renderToggleButtons(partContainer, PART_OPTIONS, selectedListPart, (part) => {
-    selectedListPart = part;
-    setupListView();
-    renderListGrid();
-  });
+  }
+
+  renderCategoryButtons(container, selectedListCategory, handleSelect);
+  refreshSecondaryRows();
   renderListGrid();
 }
 
