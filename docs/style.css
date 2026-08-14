@@ -208,6 +208,13 @@ main {
   background: #fdf1f0;
 }
 
+.section-heading {
+  text-align: center;
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin: 0 0 16px;
+}
+
 .grid-section {
   margin-bottom: 28px;
 }

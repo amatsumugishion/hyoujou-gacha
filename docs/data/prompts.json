@@ -131,7 +131,7 @@
       "驚き"
     ],
     "intensity": null,
-    "note": ""
+    "note": "spiral-only eyes"
   },
   {
     "id": 12,
@@ -191,7 +191,7 @@
       "無所属"
     ],
     "intensity": null,
-    "note": ""
+    "note": ":P"
   },
   {
     "id": 17,
@@ -347,7 +347,7 @@
       "無所属"
     ],
     "intensity": null,
-    "note": ""
+    "note": "narrowed eyes, "
   },
   {
     "id": 30,
@@ -500,7 +500,7 @@
       "v-shaped eyebrows"
     ],
     "categories": [
-      "怒り"
+      "無所属"
     ],
     "intensity": null,
     "note": ""
@@ -551,7 +551,7 @@
       "無所属"
     ],
     "intensity": null,
-    "note": ""
+    "note": "no pupils"
   },
   {
     "id": 48,
@@ -596,7 +596,7 @@
       "disdain"
     ],
     "categories": [
-      "悲しみ"
+      "怒り"
     ],
     "intensity": null,
     "note": ""
@@ -792,6 +792,297 @@
     "categories": [
       "笑顔",
       "驚き"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 67,
+    "file": "00198-2660791025.png",
+    "tags": [
+      "exhausted"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 68,
+    "file": "00207-1257897736.png",
+    "tags": [
+      "drunk"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 69,
+    "file": "00210-3473514892.png",
+    "tags": [
+      "sleepy"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 70,
+    "file": "00212-3628568081.png",
+    "tags": [
+      "upturned eyes"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 71,
+    "file": "00217-1560197687.png",
+    "tags": [
+      "confused",
+      "head tilt",
+      "open mouth"
+    ],
+    "categories": [
+      "驚き"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 72,
+    "file": "00222-4005246678.png",
+    "tags": [
+      "sanpaku"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 73,
+    "file": "00246-560803376.png",
+    "tags": [
+      "constricted pupils"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 74,
+    "file": "00251-124939761.png",
+    "tags": [
+      "solid circle pupils"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 75,
+    "file": "00259-1314239158.png",
+    "tags": [
+      "bags under eyes"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 76,
+    "file": "00263-207106366.png",
+    "tags": [
+      "=_="
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 77,
+    "file": "00265-1147186297.png",
+    "tags": [
+      ">_<"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 78,
+    "file": "00271-2371575134.png",
+    "tags": [
+      "open mouth"
+    ],
+    "categories": [
+      "驚き"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 79,
+    "file": "00273-3327238066.png",
+    "tags": [
+      "closed mouth"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 80,
+    "file": "00275-2950276044.png",
+    "tags": [
+      ":O"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 81,
+    "file": "00281-2424847594.png",
+    "tags": [
+      "puckered lips"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 82,
+    "file": "00282-764344306.png",
+    "tags": [
+      ":3"
+    ],
+    "categories": [
+      "笑顔"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 83,
+    "file": "00294-1646522896.png",
+    "tags": [
+      "biting own lip"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 84,
+    "file": "00298-1518819730.png",
+    "tags": [
+      "screaming"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 85,
+    "file": "00304-4183685173.png",
+    "tags": [
+      "streaming tears"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 86,
+    "file": "00311-1596408055.png",
+    "tags": [
+      "wavy eyes"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 87,
+    "file": "00320-484257936.png",
+    "tags": [
+      "trembling"
+    ],
+    "categories": [
+      "悲しみ"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 88,
+    "file": "00330-2711565933.png",
+    "tags": [
+      "furrowed brow"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 89,
+    "file": "00344-2587712881.png",
+    "tags": [
+      "drooling"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 90,
+    "file": "00347-3679950808.png",
+    "tags": [
+      "sparkling eyes",
+      "drooling"
+    ],
+    "categories": [
+      "無所属"
     ],
     "intensity": null,
     "note": ""

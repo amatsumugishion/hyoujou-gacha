@@ -72,15 +72,9 @@ const COMPOSITE_OPTIONS = [
   { value: "composite", label: "複合" },
 ];
 
-// すべて画面用：すべて/口元/目元
-const PART_OPTIONS_ALL = [
-  { value: ALL_LABEL, label: "すべて" },
-  { value: "口元", label: "口元" },
-  { value: "目元", label: "目元" },
-];
-
 // 無所属（その他）画面用：単体/複合の代わりにこちらを出す
 const PART_OPTIONS_OTHER = [
+  { value: ALL_LABEL, label: "すべて" },
   { value: "口元", label: "口元" },
   { value: "目元", label: "目元" },
   { value: "その他", label: "その他" },
@@ -98,13 +92,10 @@ function renderToggleButtons(container, options, selected, onSelect) {
 }
 
 // カテゴリに応じて、口元/目元の絞り込み行をどう出すか決める
-// "other" = 無所属（その他）を選択中（単体/複合は隠し、口元/目元/その他を出す）
-// "all"   = すべてを選択中（単体/複合と、すべて/口元/目元を両方出す）
-// "none"  = それ以外の個別カテゴリ（単体/複合のみ、口元/目元は隠す）
+// "other" = 無所属（その他）を選択中（単体/複合は隠し、すべて/口元/目元/その他を出す）
+// "none"  = それ以外（すべて/個別カテゴリとも、単体/複合のみ。口元/目元は隠す）
 function partContextFor(category) {
-  if (category === OTHER_FALLBACK_LABEL) return "other";
-  if (category === ALL_LABEL) return "all";
-  return "none";
+  return category === OTHER_FALLBACK_LABEL ? "other" : "none";
 }
 
 function renderSecondaryRows(category, compositeContainer, partContainer, getComposite, setComposite, getPart, setPart, onChange) {
@@ -113,21 +104,9 @@ function renderSecondaryRows(category, compositeContainer, partContainer, getCom
   if (ctx === "other") {
     compositeContainer.style.display = "none";
     partContainer.style.display = "flex";
-    if (!["口元", "目元", "その他"].includes(getPart())) setPart("");
+    if (![ALL_LABEL, "口元", "目元", "その他"].includes(getPart())) setPart(ALL_LABEL);
     renderToggleButtons(partContainer, PART_OPTIONS_OTHER, getPart(), (v) => {
       setPart(v);
-      onChange();
-    });
-  } else if (ctx === "all") {
-    compositeContainer.style.display = "flex";
-    partContainer.style.display = "flex";
-    if (![ALL_LABEL, "口元", "目元"].includes(getPart())) setPart(ALL_LABEL);
-    renderToggleButtons(partContainer, PART_OPTIONS_ALL, getPart(), (v) => {
-      setPart(v);
-      onChange();
-    });
-    renderToggleButtons(compositeContainer, COMPOSITE_OPTIONS, getComposite(), (v) => {
-      setComposite(v);
       onChange();
     });
   } else {
@@ -143,9 +122,12 @@ function renderSecondaryRows(category, compositeContainer, partContainer, getCom
   return ctx;
 }
 
+// 無所属（その他）には複合画像は置かない
 function filteredRecords(category, compositeMode, partMode) {
+  const excludeComposite = category === OTHER_FALLBACK_LABEL;
   return records.filter((r) => {
     if (category !== ALL_LABEL && !effectiveCategories(r).includes(category)) return false;
+    if (excludeComposite && isComposite(r)) return false;
     if (compositeMode === "single" && isComposite(r)) return false;
     if (compositeMode === "composite" && !isComposite(r)) return false;
     if (partMode === "口元" || partMode === "目元") {
@@ -270,12 +252,9 @@ function buildFavoriteButton(record, onChange) {
 
 // ---- ガチャ画面 ----
 
-function drawGacha() {
-  const pool = filteredRecords(selectedGachaCategory, selectedGachaComposite, selectedGachaPart);
-  const resultEl = document.getElementById("gacha-result");
-
+function renderGachaResult(resultEl, pool, emptyMessage, redrawFn, onFavoriteChange) {
   if (pool.length === 0) {
-    resultEl.innerHTML = '<p class="placeholder">このカテゴリの画像がまだありません</p>';
+    resultEl.innerHTML = `<p class="placeholder">${emptyMessage}</p>`;
     return;
   }
 
@@ -287,7 +266,7 @@ function drawGacha() {
   img.alt = picked.tags.join(", ");
   resultEl.appendChild(img);
 
-  resultEl.appendChild(buildFavoriteButton(picked));
+  resultEl.appendChild(buildFavoriteButton(picked, onFavoriteChange));
   resultEl.appendChild(buildTagsRow(picked.tags));
 
   const jaWrap = document.createElement("div");
@@ -303,8 +282,32 @@ function drawGacha() {
   redrawBtn.className = "mode-btn";
   redrawBtn.style.marginTop = "16px";
   redrawBtn.textContent = "もう一回引く";
-  redrawBtn.addEventListener("click", drawGacha);
+  redrawBtn.addEventListener("click", redrawFn);
   resultEl.appendChild(redrawBtn);
+}
+
+function drawGacha() {
+  const pool = filteredRecords(selectedGachaCategory, selectedGachaComposite, selectedGachaPart);
+  renderGachaResult(
+    document.getElementById("gacha-result"),
+    pool,
+    "このカテゴリの画像がまだありません",
+    drawGacha,
+    () => {
+      if (document.getElementById("favorites-view").classList.contains("active")) renderFavoritesGrid();
+    }
+  );
+}
+
+function drawFavoritesGacha() {
+  const pool = records.filter((r) => getFavorites().includes(r.file));
+  renderGachaResult(
+    document.getElementById("favorites-gacha-result"),
+    pool,
+    "お気に入りがまだありません",
+    drawFavoritesGacha,
+    () => renderFavoritesGrid()
+  );
 }
 
 function setupGachaView() {
@@ -500,11 +503,16 @@ function setupModeSwitch() {
   });
 }
 
+function setupFavoritesView() {
+  document.getElementById("favorites-gacha-btn").addEventListener("click", drawFavoritesGacha);
+}
+
 async function init() {
   await loadData();
   setupModeSwitch();
   setupGachaView();
   setupListView();
+  setupFavoritesView();
   renderFavoritesGrid();
 
   document.getElementById("modal-close").addEventListener("click", closeModal);
