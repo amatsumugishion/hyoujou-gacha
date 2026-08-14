@@ -1,0 +1,292 @@
+[
+  {
+    "id": 1,
+    "file": "00030-829693321.png",
+    "tags": [
+      "smile"
+    ],
+    "categories": [
+      "笑顔"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 2,
+    "file": "00032-1023859317.png",
+    "tags": [
+      "shy"
+    ],
+    "categories": [
+      "照れ"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 3,
+    "file": "00033-2323937743.png",
+    "tags": [
+      "angry"
+    ],
+    "categories": [
+      "怒り"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 4,
+    "file": "00037-2796545261.png",
+    "tags": [
+      "sad"
+    ],
+    "categories": [
+      "悲しみ"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 5,
+    "file": "00044-3916358841.png",
+    "tags": [
+      "expressionless"
+    ],
+    "categories": [
+      "無表情"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 6,
+    "file": "00045-1453371646.png",
+    "tags": [
+      "surprised"
+    ],
+    "categories": [
+      "驚き"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 7,
+    "file": "00047-1561403789.png",
+    "tags": [
+      "fang",
+      "open mouth"
+    ],
+    "categories": [
+      "驚き"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 8,
+    "file": "00048-2341623567.png",
+    "tags": [
+      "skin fang",
+      "open mouth"
+    ],
+    "categories": [
+      "驚き"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 9,
+    "file": "00050-1984680902.png",
+    "tags": [
+      "smug"
+    ],
+    "categories": [
+      "笑顔"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 10,
+    "file": "00052-4293175387.png",
+    "tags": [
+      "confused"
+    ],
+    "categories": [
+      "驚き"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 11,
+    "file": "00055-2616467186.png",
+    "tags": [
+      "@_@"
+    ],
+    "categories": [
+      "驚き"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 12,
+    "file": "00057-2648079888.png",
+    "tags": [
+      "sparkling eyes"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 13,
+    "file": "00058-914352057.png",
+    "tags": [
+      "grin"
+    ],
+    "categories": [
+      "笑顔"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 14,
+    "file": "00061-2112805926.png",
+    "tags": [
+      "clenched teeth"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 15,
+    "file": "00062-4067911417.png",
+    "tags": [
+      "parted lips"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 16,
+    "file": "00065-2283938126.png",
+    "tags": [
+      "licking lips"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 17,
+    "file": "00066-1045383324.png",
+    "tags": [
+      "tongue out"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 18,
+    "file": "00067-4221102587.png",
+    "tags": [
+      "teeth"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 19,
+    "file": "00069-2225681907.png",
+    "tags": [
+      "sharp teeth"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 20,
+    "file": "00070-2530562632.png",
+    "tags": [
+      "sweat"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 21,
+    "file": "00072-2163004550.png",
+    "tags": [
+      "sweatdrop"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 22,
+    "file": "00074-187063353.png",
+    "tags": [
+      "uneven eyes"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 23,
+    "file": "00075-313215107.png",
+    "tags": [
+      "shaded face"
+    ],
+    "categories": [
+      "悲しみ"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 24,
+    "file": "00076-38647960.png",
+    "tags": [
+      "wide-eyed"
+    ],
+    "categories": [
+      "驚き"
+    ],
+    "intensity": null,
+    "note": ""
+  }
+]

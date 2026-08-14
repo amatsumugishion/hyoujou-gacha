@@ -1,0 +1,168 @@
+[image] 00030-829693321.png  (1024x1024)
+[prompt]
+masterpiece, best quality, high quality, highres,1girl, solo, black hair, black eyes, medium hair, upper body, white shirt, from the front, simple white background, portrait, 
+smile,
+
+----------------------------------------
+
+[image] 00032-1023859317.png  (1024x1024)
+[prompt]
+masterpiece, best quality, high quality, highres,1girl, solo, black hair, black eyes, medium hair, white shirt, upper body, from the front, simple white background, portrait, 
+shy,
+
+----------------------------------------
+
+[image] 00033-2323937743.png  (1024x1024)
+[prompt]
+masterpiece, best quality, high quality, highres,1girl, solo, black hair, black eyes, medium hair, white shirt, upper body, from the front, simple white background, portrait, 
+angry,
+
+----------------------------------------
+
+[image] 00037-2796545261.png  (1024x1024)
+[prompt]
+masterpiece, best quality, high quality, highres,1girl, solo, black hair, black eyes, medium hair, white shirt, upper body, from the front, simple white background, portrait, 
+sad,
+
+----------------------------------------
+
+[image] 00044-3916358841.png  (1024x1024)
+[prompt]
+masterpiece, best quality, high quality, highres,1girl, solo, black hair, black eyes, medium hair, white shirt, upper body, from the front, simple white background, portrait, 
+expressionless,
+
+----------------------------------------
+
+[image] 00045-1453371646.png  (1024x1024)
+[prompt]
+masterpiece, best quality, high quality, highres,1girl, solo, black hair, black eyes, medium hair, white shirt, upper body, from the front, simple white background, portrait, 
+surprised,
+
+----------------------------------------
+
+[image] 00047-1561403789.png  (1024x1024)
+[prompt]
+masterpiece, best quality, high quality, highres,1girl, solo, black hair, black eyes, medium hair, white shirt, upper body, from the front, simple white background, portrait, 
+fang, open mouth,
+
+----------------------------------------
+
+[image] 00048-2341623567.png  (1024x1024)
+[prompt]
+masterpiece, best quality, high quality, highres,1girl, solo, black hair, black eyes, medium hair, white shirt, upper body, from the front, simple white background, portrait, 
+skin fang, open mouth,
+
+----------------------------------------
+
+[image] 00050-1984680902.png  (1024x1024)
+[prompt]
+masterpiece, best quality, high quality, highres,1girl, solo, black hair, black eyes, medium hair, white shirt, upper body, from the front, simple white background, portrait, 
+smug,
+
+----------------------------------------
+
+[image] 00052-4293175387.png  (1024x1024)
+[prompt]
+masterpiece, best quality, high quality, highres,1girl, solo, black hair, black eyes, medium hair, white shirt, upper body, from the front, simple white background, portrait, 
+confused,
+
+----------------------------------------
+
+[image] 00055-2616467186.png  (1024x1024)
+[prompt]
+masterpiece, best quality, high quality, highres,1girl, solo, black hair, black eyes, medium hair, white shirt, upper body, from the front, simple white background, portrait, 
+@_@,
+
+----------------------------------------
+
+[image] 00057-2648079888.png  (1024x1024)
+[prompt]
+masterpiece, best quality, high quality, highres,1girl, solo, black hair, black eyes, medium hair, white shirt, upper body, from the front, simple white background, portrait, 
+sparkling eyes,
+
+----------------------------------------
+
+[image] 00058-914352057.png  (1024x1024)
+[prompt]
+masterpiece, best quality, high quality, highres,1girl, solo, black hair, black eyes, medium hair, white shirt, upper body, from the front, simple white background, portrait, 
+grin
+
+----------------------------------------
+
+[image] 00061-2112805926.png  (1024x1024)
+[prompt]
+masterpiece, best quality, high quality, highres,1girl, solo, black hair, black eyes, medium hair, white shirt, upper body, from the front, simple white background, portrait, 
+clenched teeth,
+
+----------------------------------------
+
+[image] 00062-4067911417.png  (1024x1024)
+[prompt]
+masterpiece, best quality, high quality, highres,1girl, solo, black hair, black eyes, medium hair, white shirt, upper body, from the front, simple white background, portrait, 
+parted lips,
+
+----------------------------------------
+
+[image] 00065-2283938126.png  (1024x1024)
+[prompt]
+masterpiece, best quality, high quality, highres,1girl, solo, black hair, black eyes, medium hair, white shirt, upper body, from the front, simple white background, portrait, 
+licking lips,
+
+----------------------------------------
+
+[image] 00066-1045383324.png  (1024x1024)
+[prompt]
+masterpiece, best quality, high quality, highres,1girl, solo, black hair, black eyes, medium hair, white shirt, upper body, from the front, simple white background, portrait, 
+tongue out,
+
+----------------------------------------
+
+[image] 00067-4221102587.png  (1024x1024)
+[prompt]
+masterpiece, best quality, high quality, highres,1girl, solo, black hair, black eyes, medium hair, white shirt, upper body, from the front, simple white background, portrait, 
+teeth
+
+----------------------------------------
+
+[image] 00069-2225681907.png  (1024x1024)
+[prompt]
+masterpiece, best quality, high quality, highres,1girl, solo, black hair, black eyes, medium hair, white shirt, upper body, from the front, simple white background, portrait, 
+sharp teeth,
+
+----------------------------------------
+
+[image] 00070-2530562632.png  (1024x1024)
+[prompt]
+masterpiece, best quality, high quality, highres,1girl, solo, black hair, black eyes, medium hair, white shirt, upper body, from the front, simple white background, portrait, 
+sweat,
+
+----------------------------------------
+
+[image] 00072-2163004550.png  (1024x1024)
+[prompt]
+masterpiece, best quality, high quality, highres,1girl, solo, black hair, black eyes, medium hair, white shirt, upper body, from the front, simple white background, portrait, 
+sweatdrop,
+
+----------------------------------------
+
+[image] 00074-187063353.png  (1024x1024)
+[prompt]
+masterpiece, best quality, high quality, highres,1girl, solo, black hair, black eyes, medium hair, white shirt, upper body, from the front, simple white background, portrait, 
+uneven eyes,
+
+----------------------------------------
+
+[image] 00075-313215107.png  (1024x1024)
+[prompt]
+masterpiece, best quality, high quality, highres,1girl, solo, black hair, black eyes, medium hair, white shirt, upper body, from the front, simple white background, portrait, 
+shaded face,
+
+----------------------------------------
+
+[image] 00076-38647960.png  (1024x1024)
+[prompt]
+masterpiece, best quality, high quality, highres,1girl, solo, black hair, black eyes, medium hair, white shirt, upper body, from the front, simple white background, portrait, 
+wide-eyed,
+
+----------------------------------------
+

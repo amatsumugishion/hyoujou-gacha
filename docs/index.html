@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>表情プロンプト保管庫</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>表情プロンプト保管庫</h1>
+  <p class="sub">表情プロンプト×画像のガチャ＆一覧ツール</p>
+</header>
+
+<nav class="mode-switch">
+  <button class="mode-btn active" data-mode="gacha">ガチャ</button>
+  <button class="mode-btn" data-mode="list">一覧</button>
+</nav>
+
+<main>
+
+  <section id="gacha-view" class="view active">
+    <div class="category-buttons" id="category-buttons"></div>
+
+    <div class="gacha-result" id="gacha-result">
+      <p class="placeholder">カテゴリを選んでガチャを引いてください</p>
+    </div>
+  </section>
+
+  <section id="list-view" class="view">
+    <div class="category-buttons" id="list-category-buttons"></div>
+    <div class="grid" id="list-grid"></div>
+  </section>
+
+</main>
+
+<div class="modal" id="modal">
+  <div class="modal-inner">
+    <button class="modal-close" id="modal-close">×</button>
+    <img id="modal-img" src="" alt="">
+    <div class="modal-tags" id="modal-tags"></div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
