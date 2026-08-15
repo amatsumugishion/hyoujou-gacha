@@ -375,9 +375,19 @@ function buildFavoriteButton(record, onChange) {
 function renderGachaResult(resultEl, pool, emptyMessage, redrawFn, onFavoriteChange, lastPickRef) {
   blurIfInside(resultEl);
 
+  // 再描画の瞬間、新しい画像が読み込まれるまで結果エリアの高さが0になる。
+  // するとページ全体が短くなり、ブラウザがスクロール位置を上に戻してしまうので、
+  // 画像が表示されるまでは今の高さを維持しておく。
+  const lockedHeight = resultEl.offsetHeight;
+  resultEl.style.minHeight = lockedHeight + "px";
+  const releaseHeight = () => {
+    resultEl.style.minHeight = "";
+  };
+
   if (pool.length === 0) {
     resultEl.innerHTML = `<p class="placeholder">${emptyMessage}</p>`;
     lastPickRef.file = null;
+    releaseHeight();
     return;
   }
 
@@ -395,6 +405,9 @@ function renderGachaResult(resultEl, pool, emptyMessage, redrawFn, onFavoriteCha
   img.src = IMG_BASE + picked.file;
   img.alt = picked.tags.join(", ");
   img.decoding = "async";
+  img.addEventListener("load", releaseHeight);
+  img.addEventListener("error", releaseHeight);
+  if (img.complete) releaseHeight();
   resultEl.appendChild(img);
 
   resultEl.appendChild(buildFavoriteButton(picked, onFavoriteChange));
