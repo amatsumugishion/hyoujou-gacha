@@ -116,7 +116,7 @@
       "confused"
     ],
     "categories": [
-      "驚き"
+      "無所属"
     ],
     "intensity": null,
     "note": ""
@@ -717,8 +717,7 @@
       "smile"
     ],
     "categories": [
-      "笑顔",
-      "無所属"
+      "笑顔"
     ],
     "intensity": null,
     "note": ""
@@ -731,8 +730,7 @@
       "clenched teeth"
     ],
     "categories": [
-      "怒り",
-      "無所属"
+      "怒り"
     ],
     "intensity": null,
     "note": ""
@@ -746,8 +744,7 @@
       "turn pale"
     ],
     "categories": [
-      "悲しみ",
-      "驚き"
+      "悲しみ"
     ],
     "intensity": null,
     "note": ""
@@ -790,8 +787,7 @@
       "fang"
     ],
     "categories": [
-      "笑顔",
-      "驚き"
+      "笑顔"
     ],
     "intensity": null,
     "note": ""
@@ -853,7 +849,7 @@
       "open mouth"
     ],
     "categories": [
-      "驚き"
+      "無所属"
     ],
     "intensity": null,
     "note": ""
@@ -877,7 +873,7 @@
       "constricted pupils"
     ],
     "categories": [
-      "無所属"
+      "驚き"
     ],
     "intensity": null,
     "note": ""
@@ -889,7 +885,7 @@
       "solid circle pupils"
     ],
     "categories": [
-      "無所属"
+      "悲しみ"
     ],
     "intensity": null,
     "note": ""
@@ -916,7 +912,7 @@
       "無所属"
     ],
     "intensity": null,
-    "note": ""
+    "note": "目の色のプロンプトを消す"
   },
   {
     "id": 77,
@@ -928,7 +924,7 @@
       "無所属"
     ],
     "intensity": null,
-    "note": ""
+    "note": "目の色のプロンプトを消す"
   },
   {
     "id": 78,
@@ -937,7 +933,7 @@
       "open mouth"
     ],
     "categories": [
-      "驚き"
+      "無所属"
     ],
     "intensity": null,
     "note": ""
@@ -1009,7 +1005,7 @@
       "screaming"
     ],
     "categories": [
-      "無所属"
+      "驚き"
     ],
     "intensity": null,
     "note": ""
@@ -1021,7 +1017,7 @@
       "streaming tears"
     ],
     "categories": [
-      "無所属"
+      "悲しみ"
     ],
     "intensity": null,
     "note": ""
@@ -1033,7 +1029,7 @@
       "wavy eyes"
     ],
     "categories": [
-      "無所属"
+      "悲しみ"
     ],
     "intensity": null,
     "note": ""
@@ -1045,7 +1041,7 @@
       "trembling"
     ],
     "categories": [
-      "悲しみ"
+      "無所属"
     ],
     "intensity": null,
     "note": ""
@@ -1057,7 +1053,7 @@
       "furrowed brow"
     ],
     "categories": [
-      "無所属"
+      "悲しみ"
     ],
     "intensity": null,
     "note": ""
@@ -1083,6 +1079,343 @@
     ],
     "categories": [
       "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 91,
+    "file": "00008-362241712.png",
+    "tags": [
+      "constricted pupils",
+      ":3",
+      "sweatdrop"
+    ],
+    "categories": [
+      "笑顔"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 92,
+    "file": "00016-278713500.png",
+    "tags": [
+      "smile",
+      "open mouth",
+      ">_<"
+    ],
+    "categories": [
+      "笑顔",
+      "驚き"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 93,
+    "file": "00018-2813754450.png",
+    "tags": [
+      "grin",
+      "sharp teeth"
+    ],
+    "categories": [
+      "笑顔"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 94,
+    "file": "00022-3850261879.png",
+    "tags": [
+      "expressionless",
+      "jitome",
+      "chestnut mouth"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 95,
+    "file": "00035-2102231927.png",
+    "tags": [
+      "nervous",
+      "light smile",
+      "open mouth"
+    ],
+    "categories": [
+      "驚き"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 96,
+    "file": "00046-2014995232.png",
+    "tags": [
+      "full-face blush",
+      "uneven eyes",
+      "open mouth",
+      "surprised"
+    ],
+    "categories": [
+      "驚き"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 97,
+    "file": "00048-3122083699.png",
+    "tags": [
+      "blush",
+      "wavy mouth",
+      "open mouth"
+    ],
+    "categories": [
+      "驚き",
+      "照れ"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 98,
+    "file": "00051-32899855.png",
+    "tags": [
+      "frown",
+      "wavy mouth",
+      "open mouth"
+    ],
+    "categories": [
+      "悲しみ",
+      "驚き"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 99,
+    "file": "00052-167795392.png",
+    "tags": [
+      "pout",
+      "half-closed eyes"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 100,
+    "file": "00052-1696521965.png",
+    "tags": [
+      "disgust",
+      "sweatdrop",
+      ":O"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 101,
+    "file": "00057-1053399730.png",
+    "tags": [
+      "disdain",
+      "tsurime"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 102,
+    "file": "00068-3245407129.png",
+    "tags": [
+      "shaded face",
+      "yandere",
+      "smile",
+      "closed mouth"
+    ],
+    "categories": [
+      "笑顔"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 103,
+    "file": "00074-1053811862.png",
+    "tags": [
+      "gloom expression",
+      "open mouth",
+      "tears"
+    ],
+    "categories": [
+      "悲しみ",
+      "驚き"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 104,
+    "file": "00079-4027369342.png",
+    "tags": [
+      "glaring",
+      "trembling",
+      "clenched teeth"
+    ],
+    "categories": [
+      "悲しみ"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 105,
+    "file": "00098-4180976538.png",
+    "tags": [
+      "tears",
+      "sleepy",
+      "yawning"
+    ],
+    "categories": [
+      "悲しみ"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 106,
+    "file": "00102-1189852988.png",
+    "tags": [
+      "turn pale",
+      "closed mouth",
+      "empty eyes"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 107,
+    "file": "00106-2674279896.png",
+    "tags": [
+      "@_@",
+      "ringed eyes",
+      "panicking"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 108,
+    "file": "00109-2340633668.png",
+    "tags": [
+      "wide-eyed",
+      "uneven eyes",
+      "sweatdrop"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 109,
+    "file": "00110-3315720390.png",
+    "tags": [
+      "scared",
+      "shaded face"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 110,
+    "file": "00117-1951599522.png",
+    "tags": [
+      "horrified",
+      "open mouth"
+    ],
+    "categories": [
+      "驚き"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 111,
+    "file": "00122-783901282.png",
+    "tags": [
+      "confused",
+      "@_@"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 112,
+    "file": "00129-3065783723.png",
+    "tags": [
+      "heart-shaped pupils",
+      "puckered lips"
+    ],
+    "categories": [
+      "無所属"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 113,
+    "file": "00138-1947509659.png",
+    "tags": [
+      "smile",
+      "uneven eyes",
+      "open mouth",
+      "head tilt"
+    ],
+    "categories": [
+      "笑顔",
+      "驚き"
+    ],
+    "intensity": null,
+    "note": ""
+  },
+  {
+    "id": 114,
+    "file": "00148-2566227916.png",
+    "tags": [
+      "wink",
+      "licking lips",
+      "smile"
+    ],
+    "categories": [
+      "笑顔"
     ],
     "intensity": null,
     "note": ""
