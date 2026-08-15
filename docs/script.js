@@ -4,6 +4,53 @@ const THUMB_BASE = "img/thumb/";
 function thumbSrc(file) {
   return THUMB_BASE + file.replace(/\.png$/i, ".jpg");
 }
+
+// containerの中身をinnerHTML=""で消す前に呼ぶ。
+// フォーカスの当たった要素をDOMごと消すとフォーカスがbodyに移り、
+// ブラウザによってはページが先頭にスクロールしてしまうため、先にフォーカスを外す。
+function blurIfInside(container) {
+  if (document.activeElement && container.contains(document.activeElement)) {
+    document.activeElement.blur();
+  }
+}
+
+// ---- テーマ切り替え ----
+
+const THEME_KEY = "hyoujou-gacha-theme"; // "light" | "dark"（未設定ならOS設定に従う）
+
+function effectiveTheme() {
+  const stored = localStorage.getItem(THEME_KEY);
+  if (stored === "light" || stored === "dark") return stored;
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+
+function applyTheme(theme) {
+  if (theme === "light" || theme === "dark") {
+    document.documentElement.setAttribute("data-theme", theme);
+  } else {
+    document.documentElement.removeAttribute("data-theme");
+  }
+}
+
+// 初回ペイント前になるべく早くテーマを適用する（ちらつき防止）
+applyTheme(localStorage.getItem(THEME_KEY));
+
+function setupThemeToggle() {
+  const btn = document.getElementById("theme-toggle");
+
+  function render() {
+    btn.textContent = effectiveTheme() === "dark" ? "ライトモード" : "ダークモード";
+  }
+
+  btn.addEventListener("click", () => {
+    const next = effectiveTheme() === "dark" ? "light" : "dark";
+    localStorage.setItem(THEME_KEY, next);
+    applyTheme(next);
+    render();
+  });
+
+  render();
+}
 const ALL_LABEL = "すべて";
 const OTHER_CATEGORY = "無所属";
 const OTHER_FALLBACK_LABEL = "無所属（その他）";
@@ -112,6 +159,7 @@ function isComposite(record) {
 }
 
 function renderCategoryButtons(container, selected, onSelect) {
+  blurIfInside(container);
   container.innerHTML = "";
   categories.forEach((cat) => {
     const btn = document.createElement("button");
@@ -137,6 +185,7 @@ const PART_OPTIONS_OTHER = [
 ];
 
 function renderToggleButtons(container, options, selected, onSelect) {
+  blurIfInside(container);
   container.innerHTML = "";
   options.forEach((opt) => {
     const btn = document.createElement("button");
@@ -324,6 +373,8 @@ function buildFavoriteButton(record, onChange) {
 // ---- ガチャ画面 ----
 
 function renderGachaResult(resultEl, pool, emptyMessage, redrawFn, onFavoriteChange, lastPickRef) {
+  blurIfInside(resultEl);
+
   if (pool.length === 0) {
     resultEl.innerHTML = `<p class="placeholder">${emptyMessage}</p>`;
     lastPickRef.file = null;
@@ -427,6 +478,7 @@ function setupGachaView() {
 // ---- 一覧画面 ----
 
 function renderGridItems(grid, pool, emptyMessage) {
+  blurIfInside(grid);
   grid.innerHTML = "";
 
   if (pool.length === 0) {
@@ -484,6 +536,7 @@ function buildGridSection(title, pool) {
 
 function renderListGrid() {
   const container = document.getElementById("list-grid-container");
+  blurIfInside(container);
   container.innerHTML = "";
 
   const ctx = partContextFor(selectedListCategory);
@@ -607,6 +660,7 @@ function setupFavoritesView() {
 
 async function init() {
   loadUiState();
+  setupThemeToggle();
 
   try {
     await loadData();
