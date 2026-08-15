@@ -6,7 +6,23 @@
   --accent: #e37b8b;
   --accent-dark: #c85f70;
   --border: #ece4e1;
+  --chip-ja-bg: #fdf1f0;
+  --chip-ja-border: #f3d9d6;
   --radius: 14px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1c1817;
+    --surface: #29231f;
+    --text: #f1ebe8;
+    --text-muted: #a89e9a;
+    --accent: #e58b9a;
+    --accent-dark: #f0a7b3;
+    --border: #3d3532;
+    --chip-ja-bg: #3a2426;
+    --chip-ja-border: #55302f;
+  }
 }
 
 * {
@@ -60,17 +76,22 @@ header .sub {
 }
 
 main {
-  max-width: 720px;
-  margin: 0 auto;
   padding: 0 16px 48px;
 }
 
 .view {
   display: none;
+  max-width: 720px;
+  margin: 0 auto;
 }
 
 .view.active {
   display: block;
+}
+
+#list-view.view,
+#favorites-view.view {
+  max-width: 1000px;
 }
 
 .category-buttons {
@@ -120,6 +141,11 @@ main {
   border-color: var(--accent);
 }
 
+.gacha-draw-btn {
+  display: block;
+  margin: 0 auto 24px;
+}
+
 .gacha-result {
   background: var(--surface);
   border-radius: var(--radius);
@@ -161,8 +187,8 @@ main {
 }
 
 .tag-chip-ja {
-  background: #fdf1f0;
-  border-color: #f3d9d6;
+  background: var(--chip-ja-bg);
+  border-color: var(--chip-ja-border);
   color: var(--accent-dark);
 }
 
@@ -205,7 +231,7 @@ main {
 .favorite-btn.active {
   border-color: var(--accent);
   color: var(--accent-dark);
-  background: #fdf1f0;
+  background: var(--chip-ja-bg);
 }
 
 .section-heading {
@@ -251,6 +277,22 @@ main {
   top: 4px;
   right: 4px;
   background: var(--accent-dark);
+  color: #fff;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.fav-badge {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  background: #f0b429;
   color: #fff;
   border-radius: 50%;
   width: 20px;

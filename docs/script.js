@@ -1,4 +1,9 @@
 const IMG_BASE = "img/full/";
+const THUMB_BASE = "img/thumb/";
+
+function thumbSrc(file) {
+  return THUMB_BASE + file.replace(/\.png$/i, ".jpg");
+}
 const ALL_LABEL = "すべて";
 const OTHER_CATEGORY = "無所属";
 const OTHER_FALLBACK_LABEL = "無所属（その他）";
@@ -16,15 +21,66 @@ let selectedListComposite = "all";
 let selectedGachaPart = ALL_LABEL; // すべて | 口元 | 目元
 let selectedListPart = ALL_LABEL;
 
+const STATE_KEY = "hyoujou-gacha-ui-state";
+
+function saveUiState() {
+  try {
+    localStorage.setItem(STATE_KEY, JSON.stringify({
+      gachaCategory: selectedGachaCategory,
+      gachaComposite: selectedGachaComposite,
+      gachaPart: selectedGachaPart,
+      listCategory: selectedListCategory,
+      listComposite: selectedListComposite,
+      listPart: selectedListPart,
+    }));
+  } catch {
+    // localStorageが使えない環境では何もしない
+  }
+}
+
+function loadUiState() {
+  let saved;
+  try {
+    saved = JSON.parse(localStorage.getItem(STATE_KEY));
+  } catch {
+    return;
+  }
+  if (!saved) return;
+  if (saved.gachaCategory) selectedGachaCategory = saved.gachaCategory;
+  if (saved.gachaComposite) selectedGachaComposite = saved.gachaComposite;
+  if (saved.gachaPart) selectedGachaPart = saved.gachaPart;
+  if (saved.listCategory) selectedListCategory = saved.listCategory;
+  if (saved.listComposite) selectedListComposite = saved.listComposite;
+  if (saved.listPart) selectedListPart = saved.listPart;
+}
+
+function showFatalError(message) {
+  document.querySelectorAll(".view").forEach((v) => v.classList.remove("active"));
+  const main = document.querySelector("main");
+  const p = document.createElement("p");
+  p.className = "empty-note";
+  p.textContent = message;
+  main.appendChild(p);
+}
+
 async function loadData() {
-  const [promptsRes, translationsRes, partRulesRes] = await Promise.all([
-    fetch("data/prompts.json"),
-    fetch("data/tag_translations.json"),
-    fetch("data/part_rules.json"),
-  ]);
-  records = await promptsRes.json();
-  translations = await translationsRes.json();
-  partRules = await partRulesRes.json();
+  let promptsRes, translationsRes, partRulesRes;
+  try {
+    [promptsRes, translationsRes, partRulesRes] = await Promise.all([
+      fetch("data/prompts.json"),
+      fetch("data/tag_translations.json"),
+      fetch("data/part_rules.json"),
+    ]);
+    if (!promptsRes.ok || !translationsRes.ok || !partRulesRes.ok) {
+      throw new Error("fetch failed");
+    }
+    records = await promptsRes.json();
+    translations = await translationsRes.json();
+    partRules = await partRulesRes.json();
+  } catch (e) {
+    showFatalError("データの読み込みに失敗しました。時間をおいて再読み込みしてください。");
+    throw e;
+  }
 
   const set = new Set();
   records.forEach((r) => effectiveCategories(r).forEach((c) => set.add(c)));
@@ -184,6 +240,18 @@ function buildTagsRow(tags) {
   copyBtn.title = "プロンプトをコピー";
   copyBtn.addEventListener("click", () => {
     const original = copyBtn.textContent;
+    const resetLater = () => {
+      setTimeout(() => {
+        copyBtn.textContent = original;
+      }, 1200);
+    };
+
+    if (!navigator.clipboard || !navigator.clipboard.writeText) {
+      copyBtn.textContent = "コピーに失敗しました";
+      resetLater();
+      return;
+    }
+
     navigator.clipboard.writeText(tags.join(", "))
       .then(() => {
         copyBtn.textContent = "コピーしました";
@@ -191,11 +259,7 @@ function buildTagsRow(tags) {
       .catch(() => {
         copyBtn.textContent = "コピーに失敗しました";
       })
-      .finally(() => {
-        setTimeout(() => {
-          copyBtn.textContent = original;
-        }, 1200);
-      });
+      .finally(resetLater);
   });
   row.appendChild(copyBtn);
 
@@ -205,28 +269,35 @@ function buildTagsRow(tags) {
 // ---- お気に入り ----
 
 const FAVORITES_KEY = "hyoujou-gacha-favorites";
+let favoritesCache = null;
+
+function loadFavoritesCache() {
+  if (favoritesCache === null) {
+    try {
+      favoritesCache = new Set(JSON.parse(localStorage.getItem(FAVORITES_KEY)) || []);
+    } catch {
+      favoritesCache = new Set();
+    }
+  }
+  return favoritesCache;
+}
 
 function getFavorites() {
-  try {
-    return JSON.parse(localStorage.getItem(FAVORITES_KEY)) || [];
-  } catch {
-    return [];
-  }
+  return Array.from(loadFavoritesCache());
 }
 
 function isFavorite(file) {
-  return getFavorites().includes(file);
+  return loadFavoritesCache().has(file);
 }
 
 function toggleFavorite(file) {
-  const favs = getFavorites();
-  const idx = favs.indexOf(file);
-  if (idx === -1) {
-    favs.push(file);
+  const cache = loadFavoritesCache();
+  if (cache.has(file)) {
+    cache.delete(file);
   } else {
-    favs.splice(idx, 1);
+    cache.add(file);
   }
-  localStorage.setItem(FAVORITES_KEY, JSON.stringify(favs));
+  localStorage.setItem(FAVORITES_KEY, JSON.stringify(Array.from(cache)));
 }
 
 function buildFavoriteButton(record, onChange) {
@@ -252,18 +323,27 @@ function buildFavoriteButton(record, onChange) {
 
 // ---- ガチャ画面 ----
 
-function renderGachaResult(resultEl, pool, emptyMessage, redrawFn, onFavoriteChange) {
+function renderGachaResult(resultEl, pool, emptyMessage, redrawFn, onFavoriteChange, lastPickRef) {
   if (pool.length === 0) {
     resultEl.innerHTML = `<p class="placeholder">${emptyMessage}</p>`;
+    lastPickRef.file = null;
     return;
   }
 
-  const picked = pool[Math.floor(Math.random() * pool.length)];
+  let candidates = pool;
+  if (pool.length > 1 && lastPickRef.file) {
+    const filtered = pool.filter((r) => r.file !== lastPickRef.file);
+    if (filtered.length > 0) candidates = filtered;
+  }
+
+  const picked = candidates[Math.floor(Math.random() * candidates.length)];
+  lastPickRef.file = picked.file;
 
   resultEl.innerHTML = "";
   const img = document.createElement("img");
   img.src = IMG_BASE + picked.file;
   img.alt = picked.tags.join(", ");
+  img.decoding = "async";
   resultEl.appendChild(img);
 
   resultEl.appendChild(buildFavoriteButton(picked, onFavoriteChange));
@@ -286,6 +366,9 @@ function renderGachaResult(resultEl, pool, emptyMessage, redrawFn, onFavoriteCha
   resultEl.appendChild(redrawBtn);
 }
 
+const gachaLastPick = { file: null };
+const favoritesGachaLastPick = { file: null };
+
 function drawGacha() {
   const pool = filteredRecords(selectedGachaCategory, selectedGachaComposite, selectedGachaPart);
   renderGachaResult(
@@ -295,7 +378,9 @@ function drawGacha() {
     drawGacha,
     () => {
       if (document.getElementById("favorites-view").classList.contains("active")) renderFavoritesGrid();
-    }
+      if (document.getElementById("list-view").classList.contains("active")) renderListGrid();
+    },
+    gachaLastPick
   );
 }
 
@@ -306,7 +391,8 @@ function drawFavoritesGacha() {
     pool,
     "お気に入りがまだありません",
     drawFavoritesGacha,
-    () => renderFavoritesGrid()
+    () => renderFavoritesGrid(),
+    favoritesGachaLastPick
   );
 }
 
@@ -320,7 +406,7 @@ function setupGachaView() {
       selectedGachaCategory, compositeContainer, partContainer,
       () => selectedGachaComposite, (v) => { selectedGachaComposite = v; },
       () => selectedGachaPart, (v) => { selectedGachaPart = v; },
-      () => { refreshSecondaryRows(); drawGacha(); }
+      () => { refreshSecondaryRows(); drawGacha(); saveUiState(); }
     );
   }
 
@@ -329,22 +415,13 @@ function setupGachaView() {
     renderCategoryButtons(container, selectedGachaCategory, handleSelect);
     refreshSecondaryRows();
     drawGacha();
+    saveUiState();
   }
 
   renderCategoryButtons(container, selectedGachaCategory, handleSelect);
   refreshSecondaryRows();
 
-  let gachaBtn = document.getElementById("gacha-draw-btn");
-  if (!gachaBtn) {
-    gachaBtn = document.createElement("button");
-    gachaBtn.id = "gacha-draw-btn";
-    gachaBtn.className = "mode-btn";
-    gachaBtn.textContent = "ガチャを引く";
-    gachaBtn.style.display = "block";
-    gachaBtn.style.margin = "0 auto 24px";
-    gachaBtn.addEventListener("click", drawGacha);
-    partContainer.insertAdjacentElement("afterend", gachaBtn);
-  }
+  document.getElementById("gacha-draw-btn").addEventListener("click", drawGacha);
 }
 
 // ---- 一覧画面 ----
@@ -362,10 +439,19 @@ function renderGridItems(grid, pool, emptyMessage) {
     item.className = "grid-item";
 
     const img = document.createElement("img");
-    img.src = IMG_BASE + r.file;
+    img.src = thumbSrc(r.file);
     img.alt = r.tags.join(", ");
+    img.loading = "lazy";
+    img.decoding = "async";
     img.addEventListener("click", () => openModal(r));
     item.appendChild(img);
+
+    if (isFavorite(r.file)) {
+      const favBadge = document.createElement("span");
+      favBadge.className = "fav-badge";
+      favBadge.textContent = "★";
+      item.appendChild(favBadge);
+    }
 
     if (r.note) {
       const badge = document.createElement("span");
@@ -444,7 +530,7 @@ function setupListView() {
       selectedListCategory, compositeContainer, partContainer,
       () => selectedListComposite, (v) => { selectedListComposite = v; },
       () => selectedListPart, (v) => { selectedListPart = v; },
-      () => { refreshSecondaryRows(); renderListGrid(); }
+      () => { refreshSecondaryRows(); renderListGrid(); saveUiState(); }
     );
   }
 
@@ -453,6 +539,7 @@ function setupListView() {
     renderCategoryButtons(container, selectedListCategory, handleSelect);
     refreshSecondaryRows();
     renderListGrid();
+    saveUiState();
   }
 
   renderCategoryButtons(container, selectedListCategory, handleSelect);
@@ -463,13 +550,18 @@ function setupListView() {
 // ---- モーダル ----
 
 function openModal(record) {
-  document.getElementById("modal-img").src = IMG_BASE + record.file;
+  const img = document.getElementById("modal-img");
+  img.src = IMG_BASE + record.file;
+  img.alt = record.tags.join(", ");
 
   const favSlot = document.getElementById("modal-favorite");
   favSlot.innerHTML = "";
   favSlot.appendChild(buildFavoriteButton(record, () => {
     if (document.getElementById("favorites-view").classList.contains("active")) {
       renderFavoritesGrid();
+    }
+    if (document.getElementById("list-view").classList.contains("active")) {
+      renderListGrid();
     }
   }));
 
@@ -480,10 +572,16 @@ function openModal(record) {
   renderTranslatedChips(document.getElementById("modal-tags-ja"), record.tags);
   renderNote(document.getElementById("modal-note"), record.note);
   document.getElementById("modal").classList.add("active");
+  document.body.style.overflow = "hidden";
+  history.pushState({ modal: true }, "");
 }
 
-function closeModal() {
+function closeModal(fromPopstate) {
   document.getElementById("modal").classList.remove("active");
+  document.body.style.overflow = "";
+  if (!fromPopstate && history.state && history.state.modal) {
+    history.back();
+  }
 }
 
 // ---- モード切り替え ----
@@ -508,16 +606,33 @@ function setupFavoritesView() {
 }
 
 async function init() {
-  await loadData();
+  loadUiState();
+
+  try {
+    await loadData();
+  } catch {
+    return;
+  }
+
   setupModeSwitch();
   setupGachaView();
   setupListView();
   setupFavoritesView();
   renderFavoritesGrid();
 
-  document.getElementById("modal-close").addEventListener("click", closeModal);
+  document.getElementById("modal-close").addEventListener("click", () => closeModal());
   document.getElementById("modal").addEventListener("click", (e) => {
     if (e.target.id === "modal") closeModal();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && document.getElementById("modal").classList.contains("active")) {
+      closeModal();
+    }
+  });
+  window.addEventListener("popstate", () => {
+    if (document.getElementById("modal").classList.contains("active")) {
+      closeModal(true);
+    }
   });
 }
 

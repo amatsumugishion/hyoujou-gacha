@@ -24,6 +24,7 @@
     <div class="category-buttons" id="category-buttons"></div>
     <div class="composite-buttons" id="gacha-composite-buttons"></div>
     <div class="composite-buttons" id="gacha-part-buttons"></div>
+    <button id="gacha-draw-btn" class="mode-btn gacha-draw-btn">ガチャを引く</button>
 
     <div class="gacha-result" id="gacha-result">
       <p class="placeholder">カテゴリを選んでガチャを引いてください</p>
@@ -39,7 +40,7 @@
 
   <section id="favorites-view" class="view">
     <h2 class="section-heading">お気に入りガチャ</h2>
-    <button id="favorites-gacha-btn" class="mode-btn" style="display:block;margin:0 auto 24px;">ガチャを引く</button>
+    <button id="favorites-gacha-btn" class="mode-btn gacha-draw-btn">ガチャを引く</button>
     <div class="gacha-result" id="favorites-gacha-result">
       <p class="placeholder">お気に入りからガチャを引けます</p>
     </div>
@@ -50,7 +51,7 @@
 
 </main>
 
-<div class="modal" id="modal">
+<div class="modal" id="modal" role="dialog" aria-modal="true">
   <div class="modal-inner">
     <button class="modal-close" id="modal-close">×</button>
     <img id="modal-img" src="" alt="">
