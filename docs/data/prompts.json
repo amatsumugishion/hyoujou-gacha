@@ -1106,8 +1106,7 @@
       ">_<"
     ],
     "categories": [
-      "笑顔",
-      "驚き"
+      "笑顔"
     ],
     "intensity": null,
     "note": ""
@@ -1148,7 +1147,7 @@
       "open mouth"
     ],
     "categories": [
-      "驚き"
+      "笑顔"
     ],
     "intensity": null,
     "note": ""
@@ -1163,7 +1162,7 @@
       "surprised"
     ],
     "categories": [
-      "驚き"
+      "照れ"
     ],
     "intensity": null,
     "note": ""
@@ -1177,7 +1176,6 @@
       "open mouth"
     ],
     "categories": [
-      "驚き",
       "照れ"
     ],
     "intensity": null,
@@ -1192,8 +1190,7 @@
       "open mouth"
     ],
     "categories": [
-      "悲しみ",
-      "驚き"
+      "怒り"
     ],
     "intensity": null,
     "note": ""
@@ -1206,7 +1203,7 @@
       "half-closed eyes"
     ],
     "categories": [
-      "無所属"
+      "怒り"
     ],
     "intensity": null,
     "note": ""
@@ -1233,7 +1230,7 @@
       "tsurime"
     ],
     "categories": [
-      "無所属"
+      "怒り"
     ],
     "intensity": null,
     "note": ""
@@ -1262,8 +1259,7 @@
       "tears"
     ],
     "categories": [
-      "悲しみ",
-      "驚き"
+      "悲しみ"
     ],
     "intensity": null,
     "note": ""
@@ -1277,7 +1273,7 @@
       "clenched teeth"
     ],
     "categories": [
-      "悲しみ"
+      "怒り"
     ],
     "intensity": null,
     "note": ""
@@ -1291,7 +1287,7 @@
       "yawning"
     ],
     "categories": [
-      "悲しみ"
+      "無所属"
     ],
     "intensity": null,
     "note": ""
@@ -1305,7 +1301,7 @@
       "empty eyes"
     ],
     "categories": [
-      "無所属"
+      "悲しみ"
     ],
     "intensity": null,
     "note": ""
@@ -1319,7 +1315,7 @@
       "panicking"
     ],
     "categories": [
-      "無所属"
+      "驚き"
     ],
     "intensity": null,
     "note": ""
@@ -1333,7 +1329,7 @@
       "sweatdrop"
     ],
     "categories": [
-      "無所属"
+      "驚き"
     ],
     "intensity": null,
     "note": ""
@@ -1346,7 +1342,7 @@
       "shaded face"
     ],
     "categories": [
-      "無所属"
+      "驚き"
     ],
     "intensity": null,
     "note": ""
@@ -1400,8 +1396,7 @@
       "head tilt"
     ],
     "categories": [
-      "笑顔",
-      "驚き"
+      "笑顔"
     ],
     "intensity": null,
     "note": ""
